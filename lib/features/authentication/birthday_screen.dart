@@ -43,8 +43,8 @@ class _BirthdayScreenState extends State<BirthdayScreen> {
     Navigator.of(context).pushAndRemoveUntil(
         MaterialPageRoute(
           builder: (context) => const InterestScreen(),
-        ), (route) => return true;
-    );
+        ),
+        (route) => false);
   }
 
   void _setTextFieldDate(DateTime date) {

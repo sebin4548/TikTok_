@@ -29,7 +29,10 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      body: screens[_selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.shifting,
+        onTap: _onTap,
         selectedItemColor: Theme.of(context).primaryColor,
         currentIndex: _selectedIndex,
         items: const [
@@ -45,6 +48,7 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
               FontAwesomeIcons.magnifyingGlass,
             ),
             label: "Search",
+            backgroundColor: Colors.yellow,
             tooltip: "What are you?",
           ),
         ],
