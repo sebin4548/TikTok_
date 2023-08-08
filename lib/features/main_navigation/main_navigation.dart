@@ -1,5 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:flutter/cupertino.dart';
 
 class MainNavigationScreen extends StatefulWidget {
   const MainNavigationScreen({super.key});
@@ -28,31 +27,42 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: screens[_selectedIndex],
-      bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.shifting,
-        onTap: _onTap,
-        selectedItemColor: Theme.of(context).primaryColor,
-        currentIndex: _selectedIndex,
-        items: const [
-          BottomNavigationBarItem(
-            icon: FaIcon(
-              FontAwesomeIcons.house,
-            ),
-            label: "home",
-            tooltip: "What are you?",
-          ),
-          BottomNavigationBarItem(
-            icon: FaIcon(
-              FontAwesomeIcons.magnifyingGlass,
-            ),
-            label: "Search",
-            backgroundColor: Colors.yellow,
-            tooltip: "What are you?",
-          ),
-        ],
-      ),
+    return CupertinoTabScaffold(
+      tabBar: CupertinoTabBar(items: const [
+        BottomNavigationBarItem(
+          icon: Icon(CupertinoIcons.house),
+          label: "home",
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(CupertinoIcons.house),
+          label: "Search",
+        )
+      ]),
+      tabBuilder: (context, index) => screens[index],
     );
+    // return Scaffold(
+    //   body: screens[_selectedIndex],
+    //   bottomNavigationBar: NavigationBar(
+    //     selectedIndex: _selectedIndex,
+    //     onDestinationSelected: _onTap,
+    //     labelBehavior : NavigationDestinationLabelBehavior.onlyShowSelected. ,
+    //     destinations: const [
+    //       NavigationDestination(
+    //         icon: FaIcon(
+    //           FontAwesomeIcons.house,
+    //           color: Colors.amber,
+    //         ),
+    //         label: "home",
+    //       ),
+    //       NavigationDestination(
+    //         icon: FaIcon(
+    //           FontAwesomeIcons.magnifyingGlass,
+    //           color: Colors.cyan,
+    //         ),
+    //         label: "home",
+    //       )
+    //     ],
+    //   ),
+    // );
   }
 }
