@@ -36,10 +36,15 @@ class _BirthdayScreenState extends State<BirthdayScreen> {
   }
 
   void _onNextTap() {
-    Navigator.of(context).push(MaterialPageRoute(
-      builder: (context) =>
-          const InterestScreen(), //Stateful widget에서는 굳이 context를 쓸 필요가 없다.
-    ));
+    // Navigator.of(context).push(MaterialPageRoute(
+    //   builder: (context) =>
+    //       const InterestScreen(), //Stateful widget에서는 굳이 context를 쓸 필요가 없다.
+    // ));
+    Navigator.of(context).pushAndRemoveUntil(
+        MaterialPageRoute(
+          builder: (context) => const InterestScreen(),
+        ), (route) => return true;
+    );
   }
 
   void _setTextFieldDate(DateTime date) {

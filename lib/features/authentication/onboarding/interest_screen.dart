@@ -75,7 +75,7 @@ class _InterestScreenState extends State<InterestScreen> {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => const TurorialScreen(),
+        builder: (context) => const TutorialScreen(),
       ),
     );
   }
