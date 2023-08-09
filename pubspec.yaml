@@ -37,8 +37,8 @@ dependencies:
   cupertino_icons: ^1.0.2
 
   font_awesome_flutter: 10.3.0 
-  video_player : ^2.4.10
-
+  video_player : 2.4.10
+  visibility_detector : 0.3.3
   
 
 dev_dependencies:
@@ -67,8 +67,8 @@ flutter:
   assets:
     # - assets/video/KakaoTalk_Video_2023-08-08-18-18-16.mp4
     - assets/video/video.mp4
-    - assets/video/KakaoTalk_Video_2023-08-08-18-18-29.mp4
-    - assets/video/KakaoTalk_Video_2023-08-08-18-18-21.mp4
+    # - assets/video/KakaoTalk_Video_2023-08-08-18-18-29.mp4
+    # - assets/video/KakaoTalk_Video_2023-08-08-18-18-21.mp4
     # - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
