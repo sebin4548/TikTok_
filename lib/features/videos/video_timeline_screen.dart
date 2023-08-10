@@ -30,12 +30,7 @@ class _VideoTimelineScreenState extends State<VideoTimelineScreen> {
     );
     if (page == _itemCount - 1) {
       _itemCount = _itemCount + 4;
-      colors.addAll([
-        Colors.blue,
-        Colors.red,
-        Colors.yellow,
-        Colors.teal,
-      ]);
+
       setState(() {});
     }
   }
