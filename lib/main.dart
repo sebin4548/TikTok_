@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
-import 'package:tiktok_clone/features/main_navigation/main_navigation.dart';
+import 'package:tiktok_clone/features/inbox/activity_screen.dart';
 
 void main() {
   runApp(const TikTikApp());
@@ -21,6 +21,10 @@ class TikTikApp extends StatelessWidget {
           cursorColor: Color(0xFFE9435A),
           // selectionColor: Color(0xFFE9435A),
         ),
+        // 이거를 하면 material design에서 버튼 누르면 생기는 잔상을 없앨 수 있음
+        splashColor: Colors.transparent,
+        highlightColor: Colors.transparent,
+
         appBarTheme: const AppBarTheme(
           backgroundColor: Colors.white,
           foregroundColor: Colors.black,
@@ -31,7 +35,7 @@ class TikTikApp extends StatelessWidget {
           ),
         ),
       ),
-      home: const MainNavigationScreen(),
+      home: const ActivityScreen(),
     );
   }
 }

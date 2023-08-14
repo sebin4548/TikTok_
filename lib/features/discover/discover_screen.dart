@@ -15,7 +15,6 @@ final tabs = [
 ];
 final list = [
   "https://cdn.policetv.co.kr/news/photo/202308/45510_49999_3728.jpg",
-  "https://www.ikbc.co.kr/data/kbc/image/2023/03/04/kbc202303040030.800x.9.png",
   "https://img.khan.co.kr/news/2023/03/29/news-p.v1.20230329.59f23e58d4894156b2ab5824d13da175_P1.jpg",
   "https://img.biz.sbs.co.kr/upload/2023/07/11/6sd1689026811341-850.jpg",
   "https://image.imnews.imbc.com/news/2023/politics/article/__icsFiles/afieldfile/2023/07/17/SY20230717-07.jpg",
@@ -30,9 +29,13 @@ class DiscoverScreen extends StatefulWidget {
   State<DiscoverScreen> createState() => _DiscoverScreenState();
 }
 
-class _DiscoverScreenState extends State<DiscoverScreen> {
+class _DiscoverScreenState extends State<DiscoverScreen>
+    with SingleTickerProviderStateMixin {
   final TextEditingController _textEditingController =
       TextEditingController(text: "Initial Text");
+
+  late final TabController _controller;
+  // int _selectedIndex = 0;
 
   void _onSearchChanged(String value) {
     print(value);
@@ -46,7 +49,26 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
   @override
   void dispose() {
     _textEditingController.dispose();
+    _controller.dispose();
     super.dispose();
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _controller = TabController(length: tabs.length, vsync: this);
+
+    _controller.addListener(() {
+      // setState(() {
+      //   _selectedIndex = _controller.index;
+      // });
+
+      if (_controller.indexIsChanging) {
+        FocusScope.of(context).unfocus();
+        print("Selected Index: ${_controller.index.toString()}");
+      }
+    });
   }
 
   @override
@@ -63,6 +85,7 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
             onSubmitted: _onSearchSubmitted,
           ),
           bottom: TabBar(
+            controller: _controller,
             splashFactory: NoSplash.splashFactory,
             isScrollable: true,
             labelStyle: const TextStyle(
@@ -83,6 +106,7 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
           ),
         ),
         body: TabBarView(
+          controller: _controller,
           children: [
             GridView.builder(
               keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
@@ -154,17 +178,9 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                   )
                 ],
               ),
-
-              // Image.asset(
-              //   "assets/images/KakaoTalk_Photo_2023-08-11-15-44-23 009.jpeg",
-              // ),
-              // Container(
-              //   color: Colors.blue,
-              //   child: Center(
-              //     child: Text("$index"),
-              //   ),
             ),
             for (var tab in tabs.skip(1))
+              // for (var tab in tabs)
               Center(
                 child: Text(
                   tab,
