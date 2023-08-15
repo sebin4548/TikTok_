@@ -18,21 +18,63 @@ class _ActivityScreenState extends State<ActivityScreen>
     setState(() {});
   }
 
+  final List<Map<String, dynamic>> _tabs = [
+    {
+      "title": "All activity",
+      "icon": FontAwesomeIcons.solidMessage,
+    },
+    {
+      "title": "Likes",
+      "icon": FontAwesomeIcons.solidHeart,
+    },
+    {
+      "title": "Comments",
+      "icon": FontAwesomeIcons.solidComments,
+    },
+    {
+      "title": "Mentions",
+      "icon": FontAwesomeIcons.at,
+    },
+    {
+      "title": "Followers",
+      "icon": FontAwesomeIcons.solidUser,
+    },
+    {
+      "title": "From TikTok",
+      "icon": FontAwesomeIcons.tiktok,
+    }
+  ];
+
+  final bool _isOn = false;
   //this나 다른 instance를 참조하기 위해서는 late여야 한다.
   late final AnimationController _animationController = AnimationController(
     vsync: this,
-    duration: const Duration(milliseconds: 200),
+    duration: const Duration(milliseconds: 2000),
   );
+
+  late final Animation<Offset> _panelAnimation = Tween(
+    begin: const Offset(0, 0),
+    end: const Offset(0, -1), //1은 1픽셀을 의미하는게 아니라 전체의 퍼센트를 의미함
+  ).animate(_animationController);
 
   late final Animation<double> _animation =
       Tween(begin: 0.0, end: 0.5).animate(_animationController);
 
-  void _onTitleTap() {
+  late final Animation<Color?> _barrierAnimation = ColorTween(
+    begin: Colors.black.withOpacity(0.3),
+    end: Colors.transparent,
+  ).animate(_animationController);
+
+  bool _showBarrier = false;
+  void _toggleAnimations() async {
     if (_animationController.isCompleted) {
-      _animationController.reverse();
+      await _animationController.reverse();
     } else {
       _animationController.forward();
     }
+    setState(() {
+      _showBarrier = !_showBarrier;
+    });
     // _animationController.forward();
   }
 
@@ -42,7 +84,7 @@ class _ActivityScreenState extends State<ActivityScreen>
     return Scaffold(
       appBar: AppBar(
         title: GestureDetector(
-          onTap: _onTitleTap,
+          onTap: _toggleAnimations,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -162,26 +204,48 @@ class _ActivityScreenState extends State<ActivityScreen>
                 ),
             ],
           ),
-          Container(
-            decoration: const BoxDecoration(
-              color: Colors.white54,
-              borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(15),
-                bottomRight: Radius.circular(15),
-              ),
+
+          //barier은 event listener 등 모든 이벤트를 중지 시킨다.
+          if (!_showBarrier)
+            AnimatedModalBarrier(
+              color: _barrierAnimation,
+              dismissible: true,
+              onDismiss: _toggleAnimations,
             ),
-            child: const Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                ListTile(
-                  title: Text(
-                    "followers",
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
+          SlideTransition(
+            position: _panelAnimation,
+            child: Container(
+              decoration: const BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.only(
+                  bottomLeft: Radius.circular(5),
+                  bottomRight: Radius.circular(5),
                 ),
-              ],
+              ),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  for (var tab in _tabs)
+                    ListTile(
+                      title: Row(
+                        children: [
+                          FaIcon(
+                            tab["icon"],
+                            color: Colors.black,
+                            size: Sizes.size16,
+                          ),
+                          Gaps.h20,
+                          Text(
+                            tab["title"],
+                            style: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                ],
+              ),
             ),
           ),
         ],
