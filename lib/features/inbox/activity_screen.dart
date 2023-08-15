@@ -53,16 +53,16 @@ class _ActivityScreenState extends State<ActivityScreen>
   );
 
   late final Animation<Offset> _panelAnimation = Tween(
-    begin: const Offset(0, 0),
-    end: const Offset(0, -1), //1은 1픽셀을 의미하는게 아니라 전체의 퍼센트를 의미함
+    begin: const Offset(0, -1), //1은 1픽셀을 의미하는게 아니라 전체의 퍼센트를 의미함
+    end: const Offset(0, 0),
   ).animate(_animationController);
 
   late final Animation<double> _animation =
       Tween(begin: 0.0, end: 0.5).animate(_animationController);
 
   late final Animation<Color?> _barrierAnimation = ColorTween(
-    begin: Colors.black.withOpacity(0.3),
-    end: Colors.transparent,
+    begin: Colors.transparent,
+    end: Colors.black.withOpacity(0.3),
   ).animate(_animationController);
 
   bool _showBarrier = false;
@@ -206,7 +206,7 @@ class _ActivityScreenState extends State<ActivityScreen>
           ),
 
           //barier은 event listener 등 모든 이벤트를 중지 시킨다.
-          if (!_showBarrier)
+          if (_showBarrier)
             AnimatedModalBarrier(
               color: _barrierAnimation,
               dismissible: true,
