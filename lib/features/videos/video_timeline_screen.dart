@@ -14,6 +14,7 @@ class _VideoTimelineScreenState extends State<VideoTimelineScreen> {
   final Curve _scrollCurve = Curves.linear;
 
   final PageController _pageController = PageController();
+  final bool _isMute = true;
 
   List<Color> colors = [
     Colors.blue,

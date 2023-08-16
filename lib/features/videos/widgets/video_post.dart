@@ -11,8 +11,12 @@ import 'package:visibility_detector/visibility_detector.dart';
 class VideoPost extends StatefulWidget {
   final Function onVideoFinished;
   final int index;
-  const VideoPost(
-      {super.key, required this.onVideoFinished, required this.index});
+
+  const VideoPost({
+    super.key,
+    required this.onVideoFinished,
+    required this.index,
+  });
 
   @override
   State<VideoPost> createState() => _VideoPostState();
@@ -58,6 +62,7 @@ class _VideoPostState extends State<VideoPost>
       value: 1.5,
       duration: _animationDuration,
     );
+    // print(isMute);
   }
 
   @override
@@ -92,8 +97,20 @@ class _VideoPostState extends State<VideoPost>
       _isPaused = !_isPaused;
     });
   }
+
+  bool isMute = true;
   void onMute(BuildContext context) async {
-   ddddd 
+    // print("object");
+    // print("$isMute");
+    if (isMute) {
+      await _videoPlayerController.setVolume(0);
+    } else {
+      await _videoPlayerController.setVolume(100);
+    }
+    setState(() {
+      isMute = !isMute;
+    });
+    // _videoPlayerController.
   }
 
   void onCommentsTap(BuildContext context) async {
@@ -213,7 +230,7 @@ class _VideoPostState extends State<VideoPost>
                 ),
                 Gaps.v24,
                 GestureDetector(
-                  onTap: () => onCommentsTap(context),
+                  onTap: () => onMute(context),
                   child: const VideoButton(
                     icon: FontAwesomeIcons.soundcloud,
                     text: "33K",
