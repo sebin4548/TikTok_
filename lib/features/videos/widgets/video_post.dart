@@ -64,6 +64,7 @@ class _VideoPostState extends State<VideoPost>
   }
 
   void _onVisibilityChanged(VisibilityInfo info) {
+    if (!mounted) return; //stateful widget에 기본적으로 들어있음.
     if (info.visibleFraction == 1 &&
         !_isPaused &&
         !_videoPlayerController.value.isPlaying) {
@@ -111,6 +112,7 @@ class _VideoPostState extends State<VideoPost>
         children: [
           Positioned.fill(
             child: Container(
+              color: Colors.black,
               child: _videoPlayerController.value.isInitialized
                   ? VideoPlayer(_videoPlayerController)
                   : Container(color: Colors.black26),
