@@ -17,10 +17,11 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
 
   void _onGearPressed() {
     Navigator.of(context).push(MaterialPageRoute(
-      builder: (context) => const SettingScreen(),
+      builder: (context) => SettingScreen(name: Name),
     ));
   }
 
+  String Name = "theRed";
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -30,7 +31,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
           headerSliverBuilder: (context, innerBoxIsScrolled) {
             return [
               SliverAppBar(
-                title: const Text("TheRed"),
+                title: Text(Name),
                 actions: [
                   IconButton(
                     onPressed: _onGearPressed,

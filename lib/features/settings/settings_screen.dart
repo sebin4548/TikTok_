@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
 
 class SettingScreen extends StatelessWidget {
-  const SettingScreen({super.key});
+  final String name;
+  const SettingScreen({
+    super.key,
+    required this.name,
+  });
 
   @override
   Widget build(BuildContext context) {
+    // _UserProfileScreenState ssss =
+    //     context.findAncestorStateOfType<_UserProfileScreenState>();
     return Scaffold(
       appBar: AppBar(
         title: const Text("Settings"),
@@ -12,7 +18,9 @@ class SettingScreen extends StatelessWidget {
       body: ListView(
         children: [
           // LicensePage(),
+          // IconButton(onPressed: , icon: icon)
           const AboutListTile(),
+          // TextButton(onPressed: onPressed, child: child)
           ListTile(
             onTap: () async {
               final date = await showDatePicker(
@@ -26,6 +34,8 @@ class SettingScreen extends StatelessWidget {
               final time = await showTimePicker(
                   context: context, initialTime: TimeOfDay.now());
               print(time);
+
+              // widget.name = time.toString();
 
               // final booking = await showDateRangePicker(
               //   context: context,

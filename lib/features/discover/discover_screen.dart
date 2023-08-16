@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:tiktok_clone/constants/break_point.dart';
 import 'package:tiktok_clone/constants/gaps.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
 
@@ -72,6 +73,9 @@ class _DiscoverScreenState extends State<DiscoverScreen>
 
   @override
   Widget build(BuildContext context) {
+    //MediaQuery를 통해서 앱을 사용하고 있는 기기에 대한 정보 screen width, 스크린 크기, padding 크기, orientation등을 알 수 있음
+    final width = MediaQuery.of(context).size.width;
+    print(MediaQuery.of(context).padding);
     return DefaultTabController(
       length: tabs.length,
       child: Scaffold(
@@ -111,8 +115,8 @@ class _DiscoverScreenState extends State<DiscoverScreen>
               keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
               itemCount: list.length,
               padding: const EdgeInsets.symmetric(horizontal: Sizes.size8),
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: width > Breakpoints.md ? 3 : 2,
                 crossAxisSpacing: Sizes.size10,
                 mainAxisSpacing: Sizes.size10,
                 childAspectRatio: 9 / 20,
