@@ -12,6 +12,7 @@ class ActivityScreen extends StatefulWidget {
 
 class _ActivityScreenState extends State<ActivityScreen>
     with SingleTickerProviderStateMixin {
+  // ticker은 에니메이션 프레임마다 호출되는 시계. 리소스를 많이 잡아먹으므로 singleTicker을 사용하는데 위젯이 활성화 되었을 때만 사용
   final List<String> _notifications = List.generate(20, (index) => "${index}h");
   void _onDismissed(String notification) {
     _notifications.remove(notification);
@@ -49,11 +50,12 @@ class _ActivityScreenState extends State<ActivityScreen>
   //this나 다른 instance를 참조하기 위해서는 late여야 한다.
   late final AnimationController _animationController = AnimationController(
     vsync: this,
-    duration: const Duration(milliseconds: 2000),
+    duration: const Duration(milliseconds: 200),
   );
 
   late final Animation<Offset> _panelAnimation = Tween(
-    begin: const Offset(0, -1), //1은 1픽셀을 의미하는게 아니라 전체의 퍼센트를 의미함
+    begin: const Offset(0, -1),
+    //단위는 1픽셀을 의미하는게 아니라 전체의 퍼센트를 의미함. -1이니깐 맨 위로 올라가라는 뜻
     end: const Offset(0, 0),
   ).animate(_animationController);
 
@@ -65,10 +67,13 @@ class _ActivityScreenState extends State<ActivityScreen>
     end: Colors.black.withOpacity(0.3),
   ).animate(_animationController);
 
+  // all animation use same animationController.
+
   bool _showBarrier = false;
   void _toggleAnimations() async {
     if (_animationController.isCompleted) {
       await _animationController.reverse();
+      //에니메이션 과정이 다  완료될 때까지 기다리는 과정
     } else {
       _animationController.forward();
     }
@@ -86,6 +91,7 @@ class _ActivityScreenState extends State<ActivityScreen>
         title: GestureDetector(
           onTap: _toggleAnimations,
           child: Row(
+            mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const Text("All activity"),

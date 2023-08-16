@@ -31,8 +31,7 @@ class DiscoverScreen extends StatefulWidget {
 
 class _DiscoverScreenState extends State<DiscoverScreen>
     with SingleTickerProviderStateMixin {
-  final TextEditingController _textEditingController =
-      TextEditingController(text: "Initial Text");
+  final TextEditingController _textEditingController = TextEditingController();
 
   late final TabController _controller;
   // int _selectedIndex = 0;
@@ -42,7 +41,7 @@ class _DiscoverScreenState extends State<DiscoverScreen>
   }
 
   void _onSearchSubmitted(String value) {
-    print(value);
+    _textEditingController.text = "";
   }
 
   //컨트롤러를 만들고 나면 dispose도 해야한다.
