@@ -1,8 +1,8 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:tiktok_clone/features/main_navigation/main_navigation.dart';
+import 'package:tiktok_clone/features/authentication/sign_up_screen.dart';
+import "package:flutter_gen/gen_l10n/intl_generated.dart";
 
 void main() async {
   //
@@ -173,19 +173,22 @@ class TikTikApp extends StatelessWidget {
 // If you do not have a themeMode switch, uncomment this line
 // to let the device system mode control the theme mode:
 // themeMode: ThemeMode.system,
-      localizationsDelegates: const [
-        //default 위젯의 언어는 한국말로 번역된다.
-        GlobalMaterialLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-      ],
-      supportedLocales: const [
-        Locale("en"),
-        Locale("ko"),
-        Locale("es"),
-      ],
+      // localizationsDelegates: [
+      //   // AppLocali ,
+      //   //default 위젯의 언어는 한국말로 번역된다.
+      //   GlobalMaterialLocalizations.delegate,
+      //   GlobalCupertinoLocalizations.delegate,
+      //   GlobalWidgetsLocalizations.delegate,
+      // ],
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      supportedLocales: AppLocalizations.supportedLocales,
+      // supportedLocales: const [
+      //   Locale("en"),
+      //   Locale("ko"),
+      //   Locale("es"),
+      // ],
 
-      home: const MainNavigationScreen(),
+      home: const SignUpScreen(),
     );
   }
 }

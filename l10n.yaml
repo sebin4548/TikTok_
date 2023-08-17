@@ -1,0 +1,12 @@
+# //번역 파일의 위치를 명시한다. (.arb)
+arb-dir : lib/intl
+template-arb-file : intl_en.arb
+output-localization-file : intl_generated.dart
+
+
+# arb 파일은 json과 같은 역할을 한다.
+# OOOO_en.arb, OOOO_ko.arb 파일을 만들고
+# key값은 마음대로 정하면 된다.
+# 단, en, ko 파일에도 똑같은 key를 넣어야 하며, value만 다름
+
+# terminal에 flutter gen-l10n 을 입력하면 자동으로 파일이 생성된다.

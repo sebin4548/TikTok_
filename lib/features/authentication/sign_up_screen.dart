@@ -6,6 +6,7 @@ import 'package:tiktok_clone/features/authentication/username_screen.dart';
 import 'package:tiktok_clone/features/authentication/widgets/auth_button.dart';
 import 'package:tiktok_clone/features/authentication/login_screen.dart';
 import 'package:tiktok_clone/utils.dart';
+import "package:flutter_gen/gen_l10n/intl_generated.dart"; //이거는 자동 import 안됨
 
 class SignUpScreen extends StatelessWidget {
   const SignUpScreen({super.key});
@@ -38,7 +39,10 @@ class SignUpScreen extends StatelessWidget {
                 children: [
                   Gaps.v80,
                   Text(
-                    "Sign up for TikTok",
+                    // "Sign up for TikTok",
+                    // 번역을 위한 작업. 위에 자동 import 안되니깐 import 확인필요
+                    AppLocalizations.of(context)!
+                        .signUpTitle("TikTok"), //Placeholder
 
                     style: Theme.of(context).textTheme.headlineSmall,
                     // !.copyWith(color: Colors.black),
