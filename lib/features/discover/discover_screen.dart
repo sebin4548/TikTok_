@@ -82,10 +82,16 @@ class _DiscoverScreenState extends State<DiscoverScreen>
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
           // title: const Text("Discover"),
-          title: CupertinoSearchTextField(
-            controller: _textEditingController,
-            onChanged: _onSearchChanged,
-            onSubmitted: _onSearchSubmitted,
+          title: Container(
+            //constraints를 이용하여 크기를 제한한다.
+            constraints: const BoxConstraints(
+              maxWidth: Breakpoints.sm,
+            ),
+            child: CupertinoSearchTextField(
+              controller: _textEditingController,
+              onChanged: _onSearchChanged,
+              onSubmitted: _onSearchSubmitted,
+            ),
           ),
           bottom: TabBar(
             controller: _controller,
@@ -122,64 +128,69 @@ class _DiscoverScreenState extends State<DiscoverScreen>
                 childAspectRatio: 9 / 20,
               ),
               // 네트워크에서 로딩할 때는 placeholder 이미지를 나타내고, 로딩되면 네트워크 사진
-              itemBuilder: (context, index) => Column(
-                children: [
-                  Container(
-                    clipBehavior: Clip.hardEdge, //borderRadius를 구현하기 위해 필요하다.
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(Sizes.size5),
+              itemBuilder: (context, index) => LayoutBuilder(
+                //MediaQuery와 비슷하지만 다른 LayoutBuilder. 하나의 container의 maxWidth를 구하는 것등이 가능하다.
+                builder: (context, constraints) => Column(
+                  children: [
+                    Container(
+                      clipBehavior: Clip.hardEdge, //borderRadius를 구현하기 위해 필요하다.
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(Sizes.size5),
+                      ),
+                      child: AspectRatio(
+                        aspectRatio: 9 / 16,
+                        child: FadeInImage.assetNetwork(
+                            fit: BoxFit.cover,
+                            placeholder:
+                                "assets/images/KakaoTalk_Photo_2023-08-11-15-44-23 009.jpeg",
+                            image: list[index]),
+                      ),
                     ),
-                    child: AspectRatio(
-                      aspectRatio: 9 / 16,
-                      child: FadeInImage.assetNetwork(
-                          fit: BoxFit.cover,
-                          placeholder:
-                              "assets/images/KakaoTalk_Photo_2023-08-11-15-44-23 009.jpeg",
-                          image: list[index]),
+                    Gaps.v5,
+                    Text(
+                      "${constraints.maxWidth.toInt()} President HongJoonPyo 2027. MuDaeHong!!! MuDaeHong!!!",
+                      style: const TextStyle(fontSize: Sizes.size16),
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 2,
                     ),
-                  ),
-                  Gaps.v5,
-                  const Text(
-                    "President HongJoonPyo 2027. MuDaeHong!!! MuDaeHong!!!",
-                    style: TextStyle(fontSize: Sizes.size16),
-                    overflow: TextOverflow.ellipsis,
-                    maxLines: 2,
-                  ),
-                  Gaps.v5,
-                  DefaultTextStyle(
-                    //Default로 지정해두면 밑에 애들은 따라온다.
-                    style: TextStyle(
-                      color: Colors.grey.shade600,
-                      fontWeight: FontWeight.w600,
-                    ),
-                    child: Row(
-                      children: [
-                        const CircleAvatar(
-                          radius: 12,
-                          backgroundImage: NetworkImage(
-                              "http://img.yonhapnews.co.kr/etc/inner/KR/2018/05/26/AKR20180526027500001_01_i.jpg"),
-                        ),
-                        Gaps.h10,
-                        const Expanded(
-                          child: Text(
-                            "My Mudaehong is going to be president",
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                        ),
-                        FaIcon(
-                          FontAwesomeIcons.heart,
-                          size: Sizes.size14,
+                    Gaps.v5,
+                    if (constraints.maxWidth < 200 ||
+                        constraints.maxWidth > 250)
+                      DefaultTextStyle(
+                        //Default로 지정해두면 밑에 애들은 따라온다.
+                        style: TextStyle(
                           color: Colors.grey.shade600,
+                          fontWeight: FontWeight.w600,
                         ),
-                        Gaps.h2,
-                        const Text(
-                          "2.5M",
+                        child: Row(
+                          children: [
+                            const CircleAvatar(
+                              radius: 12,
+                              backgroundImage: NetworkImage(
+                                  "http://img.yonhapnews.co.kr/etc/inner/KR/2018/05/26/AKR20180526027500001_01_i.jpg"),
+                            ),
+                            Gaps.h10,
+                            const Expanded(
+                              child: Text(
+                                "My Mudaehong is going to be president",
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                            ),
+                            FaIcon(
+                              FontAwesomeIcons.heart,
+                              size: Sizes.size14,
+                              color: Colors.grey.shade600,
+                            ),
+                            Gaps.h2,
+                            const Text(
+                              "2.5M",
+                            ),
+                          ],
                         ),
-                      ],
-                    ),
-                  )
-                ],
+                      )
+                  ],
+                ),
               ),
             ),
             for (var tab in tabs.skip(1))

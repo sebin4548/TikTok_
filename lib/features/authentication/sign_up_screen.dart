@@ -5,6 +5,7 @@ import 'package:tiktok_clone/constants/sizes.dart';
 import 'package:tiktok_clone/features/authentication/username_screen.dart';
 import 'package:tiktok_clone/features/authentication/widgets/auth_button.dart';
 import 'package:tiktok_clone/features/authentication/login_screen.dart';
+import 'package:tiktok_clone/utils.dart';
 
 class SignUpScreen extends StatelessWidget {
   const SignUpScreen({super.key});
@@ -28,7 +29,7 @@ class SignUpScreen extends StatelessWidget {
         print("ssssssss $orientation");
 
         return Scaffold(
-          backgroundColor: Colors.white,
+          // backgroundColor: Colors.white,
           body: SafeArea(
             // SafeArea는 노치 부분 시간부분, 베터리잔량표시로 가려지는 부분이 없도록 만드는 것
             child: Padding(
@@ -36,19 +37,20 @@ class SignUpScreen extends StatelessWidget {
               child: Column(
                 children: [
                   Gaps.v80,
-                  const Text(
+                  Text(
                     "Sign up for TikTok",
-                    style: TextStyle(
-                      fontSize: Sizes.size28,
-                      fontWeight: FontWeight.w700,
-                    ),
+                    style: Theme.of(context).textTheme.headlineSmall,
+                    // !.copyWith(color: Colors.black),
+                    //추가적인 세팅을 지정할 수 있음
                   ),
                   Gaps.v20,
-                  const Text(
+                  Text(
                     "Create a profile, follow other accounts, make your own videos, and more.",
                     style: TextStyle(
                       fontSize: Sizes.size16,
-                      color: Colors.black45,
+                      color: isDarkMode(context)
+                          ? Colors.grey.shade500
+                          : Colors.black45,
                       // fontWeight: FontWeight.w300,
                     ),
                     textAlign: TextAlign.center,
@@ -60,6 +62,8 @@ class SignUpScreen extends StatelessWidget {
                       onTap: () => onEmailTap(context),
                       child: const AuthButton(
                         text: "Use phone or email",
+
+                        // text: Text("data", style: ,),
                         icon: FaIcon(
                           FontAwesomeIcons.user,
                         ),
@@ -110,7 +114,8 @@ class SignUpScreen extends StatelessWidget {
             ),
           ),
           bottomNavigationBar: BottomAppBar(
-            color: Colors.grey.shade50,
+            // color: Colors.grey.shade50,
+            color: isDarkMode(context) ? null : Colors.grey.shade50,
             elevation: 1,
             child: Padding(
               padding: const EdgeInsets.symmetric(vertical: Sizes.size20),
@@ -124,6 +129,7 @@ class SignUpScreen extends StatelessWidget {
                     child: Text("Login",
                         style: TextStyle(
                           fontWeight: FontWeight.w600,
+                          // color: Colors.white,
                           color: Theme.of(context).primaryColor, //
                         )),
                   ),
