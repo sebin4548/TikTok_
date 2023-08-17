@@ -17,7 +17,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
 
   void _onGearPressed() {
     Navigator.of(context).push(MaterialPageRoute(
-      builder: (context) => SettingScreen(name: Name),
+      builder: (context) => const SettingsScreen(),
     ));
   }
 
@@ -78,7 +78,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                       ),
                       Gaps.v20,
                       SizedBox(
-                        height: 50,
+                        height: 51,
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [

@@ -211,7 +211,7 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
   @override
   Widget build(BuildContext context) {
     final isDark = isDarkMode(context);
-
+    print(Localizations.localeOf(context));
     print(MediaQuery.of(context).size.width);
     return Scaffold(
       backgroundColor: (_selectedIndex == 0 || isDarkMode(context))

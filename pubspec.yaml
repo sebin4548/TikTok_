@@ -29,7 +29,12 @@ environment:
 # versions available, run `flutter pub outdated`.
 dependencies:
   flutter:
-    sdk: flutter
+     sdk: flutter
+
+  flutter_localizations:
+     sdk: flutter
+
+  intl: any
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -61,7 +66,7 @@ dev_dependencies:
 
 # The following section is specific to Flutter packages.
 flutter:
-
+  generate : true //나중에 코드를 생성하는데 도움을 준다
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.
