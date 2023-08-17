@@ -39,6 +39,7 @@ class SignUpScreen extends StatelessWidget {
                   Gaps.v80,
                   Text(
                     "Sign up for TikTok",
+
                     style: Theme.of(context).textTheme.headlineSmall,
                     // !.copyWith(color: Colors.black),
                     //추가적인 세팅을 지정할 수 있음

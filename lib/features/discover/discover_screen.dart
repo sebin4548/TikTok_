@@ -4,6 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tiktok_clone/constants/break_point.dart';
 import 'package:tiktok_clone/constants/gaps.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
+import 'package:tiktok_clone/utils.dart';
 
 final tabs = [
   "Top",
@@ -73,6 +74,7 @@ class _DiscoverScreenState extends State<DiscoverScreen>
 
   @override
   Widget build(BuildContext context) {
+    final isDark = isDarkMode(context);
     //MediaQuery를 통해서 앱을 사용하고 있는 기기에 대한 정보 screen width, 스크린 크기, padding 크기, orientation등을 알 수 있음
     final width = MediaQuery.of(context).size.width;
     print(MediaQuery.of(context).padding);
@@ -88,6 +90,8 @@ class _DiscoverScreenState extends State<DiscoverScreen>
               maxWidth: Breakpoints.sm,
             ),
             child: CupertinoSearchTextField(
+              style: TextStyle(
+                  color: isDarkMode(context) ? Colors.white : Colors.black),
               controller: _textEditingController,
               onChanged: _onSearchChanged,
               onSubmitted: _onSearchSubmitted,
@@ -100,9 +104,11 @@ class _DiscoverScreenState extends State<DiscoverScreen>
             labelStyle: const TextStyle(
               fontWeight: FontWeight.w700,
             ),
-            indicatorColor: Colors.black,
+
             unselectedLabelColor: Colors.grey.shade500,
-            labelColor: Colors.black,
+            // labelColor: Colors.black,
+            indicatorColor: Theme.of(context).tabBarTheme.indicatorColor,
+
             // tabs: for(var tab in tabs) [
             //   Tab(text : tab,),
             // ],

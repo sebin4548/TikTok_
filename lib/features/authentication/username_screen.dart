@@ -3,6 +3,7 @@ import 'package:tiktok_clone/constants/gaps.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
 import 'package:tiktok_clone/features/authentication/email_screen.dart';
 import 'package:tiktok_clone/features/authentication/widgets/form_button.dart';
+import 'package:tiktok_clone/utils.dart';
 
 class UsernameScreen extends StatefulWidget {
   const UsernameScreen({super.key});
@@ -43,7 +44,7 @@ class _UsernameScreenState extends State<UsernameScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      // backgroundColor: Colors.white,
       appBar: AppBar(
         elevation: 0,
         title: const Text(
@@ -65,11 +66,12 @@ class _UsernameScreenState extends State<UsernameScreen> {
               ),
             ),
             Gaps.v10,
-            const Text(
+            Text(
               "You can always change this later",
               style: TextStyle(
                 fontSize: Sizes.size16,
-                color: Colors.black54,
+                color:
+                    isDarkMode(context) ? Colors.grey.shade500 : Colors.black54,
               ),
             ),
             Gaps.v16,
