@@ -175,7 +175,7 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
             Positioned(
               bottom: 0,
               width: size.width,
-              child: BottomAppBar(
+              child: Container(
                 padding: const EdgeInsets.only(
                   left: Sizes.size16,
                   right: Sizes.size16,

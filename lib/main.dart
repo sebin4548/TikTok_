@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
-import 'package:tiktok_clone/features/main_navigation/main_navigation.dart';
+import 'package:tiktok_clone/features/authentication/sign_up_screen.dart';
 
 void main() async {
   //
@@ -23,7 +23,7 @@ class TikTikApp extends StatelessWidget {
       title: "TikTok",
       themeMode: ThemeMode.system, //시스템에 맞게 다크, 라이트 모드가 결정된다.
       theme: ThemeData(
-        // useMaterial3: true,
+        useMaterial3: true,
 
         // textTheme: TextTheme(
         //   headlineLarge: const TextStyle(
@@ -60,9 +60,11 @@ class TikTikApp extends StatelessWidget {
         highlightColor: Colors.transparent,
 
         appBarTheme: const AppBarTheme(
+          //material 3에 나와야 하는 특이 지점
+          surfaceTintColor: Colors.white,
           backgroundColor: Colors.white,
           foregroundColor: Colors.black,
-          elevation: 0,
+          // elevation: 0,
           titleTextStyle: TextStyle(
             color: Colors.black,
             fontSize: Sizes.size20 - Sizes.size2,
@@ -105,8 +107,13 @@ class TikTikApp extends StatelessWidget {
         bottomAppBarTheme: BottomAppBarTheme(
           color: Colors.grey.shade900,
         ),
+        appBarTheme: AppBarTheme(
+          // surfaceTintColor: Colors.white,
+          backgroundColor: Colors.grey.shade900,
+          // backgroundColor: Colors.white,
+        ),
       ),
-      home: const MainNavigationScreen(),
+      home: const SignUpScreen(),
     );
   }
 }

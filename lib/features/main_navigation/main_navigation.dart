@@ -238,11 +238,12 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
           )
         ],
       ),
-      bottomNavigationBar: BottomAppBar(
+      bottomNavigationBar: Container(
         // color: Colors.black,
         color: (_selectedIndex == 0 || isDark) ? Colors.black : Colors.white,
         child: Padding(
-          padding: const EdgeInsets.all(Sizes.size12),
+          padding:
+              const EdgeInsets.only(bottom: Sizes.size32, top: Sizes.size20),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [

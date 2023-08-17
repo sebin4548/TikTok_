@@ -155,7 +155,10 @@ class _DiscoverScreenState extends State<DiscoverScreen>
                     Gaps.v5,
                     Text(
                       "${constraints.maxWidth.toInt()} President HongJoonPyo 2027. MuDaeHong!!! MuDaeHong!!!",
-                      style: const TextStyle(fontSize: Sizes.size16),
+                      style: const TextStyle(
+                        fontSize: Sizes.size16,
+                        height: 1.1,
+                      ),
                       overflow: TextOverflow.ellipsis,
                       maxLines: 2,
                     ),

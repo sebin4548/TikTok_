@@ -146,34 +146,31 @@ class _InterestScreenState extends State<InterestScreen> {
           ),
         ),
       ),
-      bottomNavigationBar: BottomAppBar(
-        elevation: 1,
-        child: Padding(
-          padding: const EdgeInsets.only(
-            bottom: Sizes.size40,
-            top: Sizes.size16,
-            left: Sizes.size24,
-            right: Sizes.size24,
-          ),
-          // child: Container(
-          //   padding: const EdgeInsets.symmetric(
-          //     vertical: Sizes.size20,
-          //   ),
-          //   decoration: BoxDecoration(
-          //     color: Theme.of(context).primaryColor,
-          //   ),
-          //   child: const Text("next",
-          //       textAlign: TextAlign.center,
-          //       style: TextStyle(
-          //         color: Colors.white,
-          //         fontSize: Sizes.size16,
-          //       )),
-          // ),
-          child: CupertinoButton(
-            onPressed: () => _onNextTap(),
-            color: Theme.of(context).primaryColor,
-            child: const Text("next"),
-          ),
+      bottomNavigationBar: Padding(
+        padding: const EdgeInsets.only(
+          bottom: Sizes.size40,
+          top: Sizes.size16,
+          left: Sizes.size24,
+          right: Sizes.size24,
+        ),
+        // child: Container(
+        //   padding: const EdgeInsets.symmetric(
+        //     vertical: Sizes.size20,
+        //   ),
+        //   decoration: BoxDecoration(
+        //     color: Theme.of(context).primaryColor,
+        //   ),
+        //   child: const Text("next",
+        //       textAlign: TextAlign.center,
+        //       style: TextStyle(
+        //         color: Colors.white,
+        //         fontSize: Sizes.size16,
+        //       )),
+        // ),
+        child: CupertinoButton(
+          onPressed: () => _onNextTap(),
+          color: Theme.of(context).primaryColor,
+          child: const Text("next"),
         ),
       ),
     );

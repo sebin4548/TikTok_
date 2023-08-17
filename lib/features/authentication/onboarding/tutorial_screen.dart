@@ -240,10 +240,10 @@ class _TutorialScreenState extends State<TutorialScreen> {
             ),
           ),
         ),
-        bottomNavigationBar: BottomAppBar(
+        bottomNavigationBar: Container(
           child: Padding(
               padding: const EdgeInsets.symmetric(
-                vertical: Sizes.size24,
+                vertical: Sizes.size60,
                 horizontal: Sizes.size24,
               ),
               child: AnimatedOpacity(
