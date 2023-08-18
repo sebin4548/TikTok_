@@ -1,8 +1,9 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:tiktok_clone/features/authentication/sign_up_screen.dart';
-import "package:flutter_gen/gen_l10n/intl_generated.dart";
+import 'package:tiktok_clone/generated/l10n.dart';
 
 void main() async {
   //
@@ -18,6 +19,7 @@ class TikTikApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    S.load(Locale("ko"));
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: "TikTok",
@@ -180,13 +182,19 @@ class TikTikApp extends StatelessWidget {
       //   GlobalCupertinoLocalizations.delegate,
       //   GlobalWidgetsLocalizations.delegate,
       // ],
-      localizationsDelegates: AppLocalizations.localizationsDelegates,
-      supportedLocales: AppLocalizations.supportedLocales,
-      // supportedLocales: const [
-      //   Locale("en"),
-      //   Locale("ko"),
-      //   Locale("es"),
-      // ],
+
+      // comd shft p => flutter Intl : initialize =>  l10n 폴더에 있는 파일에 번역본을 쓰면 자동으로 생성 된다.
+      // flutter Intl : Add locale => ko
+      localizationsDelegates: [
+        S.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+        GlobalMaterialLocalizations.delegate,
+      ],
+      supportedLocales: [
+        Locale("en"),
+        Locale("ko"),
+      ],
 
       home: const SignUpScreen(),
     );
@@ -200,4 +208,3 @@ class TikTikApp extends StatelessWidget {
 
 /// An example of using the plugin, controlling lifecycle and playback of the
 /// video.
-

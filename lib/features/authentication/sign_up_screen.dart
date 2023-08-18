@@ -5,8 +5,8 @@ import 'package:tiktok_clone/constants/sizes.dart';
 import 'package:tiktok_clone/features/authentication/username_screen.dart';
 import 'package:tiktok_clone/features/authentication/widgets/auth_button.dart';
 import 'package:tiktok_clone/features/authentication/login_screen.dart';
+
 import 'package:tiktok_clone/utils.dart';
-import "package:flutter_gen/gen_l10n/intl_generated.dart"; //이거는 자동 import 안됨
 
 class SignUpScreen extends StatelessWidget {
   const SignUpScreen({super.key});
@@ -39,10 +39,8 @@ class SignUpScreen extends StatelessWidget {
                 children: [
                   Gaps.v80,
                   Text(
-                    // "Sign up for TikTok",
-                    // 번역을 위한 작업. 위에 자동 import 안되니깐 import 확인필요
-                    AppLocalizations.of(context)!
-                        .signUpTitle("TikTok"), //Placeholder
+                    // S.of(context).signUpTiktoks,
+                    "Sign Up Tiktoks",
 
                     style: Theme.of(context).textTheme.headlineSmall,
                     // !.copyWith(color: Colors.black),
@@ -50,7 +48,10 @@ class SignUpScreen extends StatelessWidget {
                   ),
                   Gaps.v20,
                   Text(
-                    "Create a profile, follow other accounts, make your own videos, and more.",
+                    "dddddddddsdsdssd",
+                    // S.of(context).description(0),
+                    // 이렇게 되어 있는 상태에서 Code Action(cmd .) 눌러서 바로 연결되게 하면 됨
+                    // S.of(context).signUpSubtitle,
                     style: TextStyle(
                       fontSize: Sizes.size16,
                       color: isDarkMode(context)
@@ -65,8 +66,9 @@ class SignUpScreen extends StatelessWidget {
                   if (orientation == Orientation.portrait) ...[
                     GestureDetector(
                       onTap: () => onEmailTap(context),
-                      child: const AuthButton(
-                        text: "Use phone or email",
+                      child: AuthButton(
+                        // text: S.of(context).usePhoneOrEmail,
+                        text: "Use Phone or Email",
 
                         // text: Text("data", style: ,),
                         icon: FaIcon(
@@ -77,7 +79,7 @@ class SignUpScreen extends StatelessWidget {
                     Gaps.v16,
                     GestureDetector(
                       onTap: () {},
-                      child: const AuthButton(
+                      child: AuthButton(
                         text: "Continue with apple",
                         icon: FaIcon(
                           FontAwesomeIcons.apple,
@@ -134,7 +136,8 @@ class SignUpScreen extends StatelessWidget {
                   Gaps.h5,
                   GestureDetector(
                     onTap: () => _onLoginTap(context),
-                    child: Text("Login",
+                    child: Text("ddddd",
+                        // S.of(context).login("male"),
                         style: TextStyle(
                           fontWeight: FontWeight.w600,
                           // color: Colors.white,

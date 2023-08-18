@@ -128,7 +128,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
           SwitchListTile.adaptive(
             value: _notifications,
             onChanged: _onNotificationsChanged,
-            title: const Text("Enable notifications"),
+            title: Text("Enable Notifications"),
+            // title: Text(S.of(context).enableNotifications),
             subtitle: const Text("They will be cute."),
           ),
           CheckboxListTile(
