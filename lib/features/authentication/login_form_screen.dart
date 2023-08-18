@@ -41,52 +41,53 @@ class _LoginFormScreenState extends State<LoginFormScreen> {
           horizontal: Sizes.size36,
         ),
         child: Form(
-            key: _formKey,
-            child: Column(
-              children: [
-                TextFormField(
-                  decoration: const InputDecoration(
-                    hintText: "Email",
-                  ),
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please enter some text';
-                    }
-                    return null;
-                  },
-                  onSaved: (newValue) {
-                    if (newValue != null) {
-                      formData['email'] = newValue;
-                    }
-                  },
+          key: _formKey,
+          child: Column(
+            children: [
+              TextFormField(
+                decoration: const InputDecoration(
+                  hintText: "Email",
                 ),
-                Gaps.v16,
-                TextFormField(
-                  decoration: const InputDecoration(
-                    hintText: "Password",
-                  ),
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please enter some text';
-                    }
-                    return null;
-                  },
-                  onSaved: (newValue) {
-                    if (newValue != null) {
-                      formData['password'] = newValue;
-                    }
-                  },
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Please enter some text';
+                  }
+                  return null;
+                },
+                onSaved: (newValue) {
+                  if (newValue != null) {
+                    formData['email'] = newValue;
+                  }
+                },
+              ),
+              Gaps.v16,
+              TextFormField(
+                decoration: const InputDecoration(
+                  hintText: "Password",
                 ),
-                Gaps.v28,
-                GestureDetector(
-                  onTap: _onSubmitTap,
-                  child: const FormButton(
-                    disabled: false,
-                    inputText: "Log in",
-                  ),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Please enter some text';
+                  }
+                  return null;
+                },
+                onSaved: (newValue) {
+                  if (newValue != null) {
+                    formData['password'] = newValue;
+                  }
+                },
+              ),
+              Gaps.v28,
+              GestureDetector(
+                onTap: _onSubmitTap,
+                child: const FormButton(
+                  disabled: false,
+                  inputText: "Log in",
                 ),
-              ],
-            )),
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }

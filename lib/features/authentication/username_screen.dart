@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:tiktok_clone/constants/gaps.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
 import 'package:tiktok_clone/features/authentication/email_screen.dart';
@@ -43,8 +44,12 @@ class _UsernameScreenState extends State<UsernameScreen> {
     //       // username: _username,
     //     ), //Stateful widget에서는 굳이 context를 쓸 필요가 없다.
     //   ),
-    Navigator.pushNamed(context, EmailScreen.routeName,
-        arguments: EmailScreenArgs(username: _username));
+
+    // Navigator.pushNamed(context, EmailScreen.routeName,
+    // arguments: EmailScreenArgs(username: _username));
+
+    // context.push(EmailScreen.routeName);
+    context.push(EmailScreen.routeName);
   }
 
   @override

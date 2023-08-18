@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:go_router/go_router.dart';
 import 'package:tiktok_clone/constants/gaps.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
 import 'package:tiktok_clone/features/authentication/login_screen.dart';
@@ -14,17 +15,27 @@ class SignUpScreen extends StatelessWidget {
   const SignUpScreen({super.key});
 
   void _onLoginTap(BuildContext context) async {
+    context.push(LoginScreen.routeName); //stack : 이전 화면 위에 다른 화면을 올린다.
+    // context.go(LoginScreen.routeName); //go는 다른 화면으로 이동시키며, stack에 관련된 것은 전부 무시
+
     // //await를 이용하여 정보를 주고받기
     // final result = await Navigator.of(context).push(MaterialPageRoute(
     //   builder: (context) => const LoginScreen(),
     // ));
     // print(result);
-    final result = Navigator.of(context).pushNamed(LoginScreen.routeName);
-    print(result);
+
+    // pageroute 2번째
+    // final result = Navigator.of(context).pushNamed(LoginScreen.routeName);
+    // print(result);
   }
 
   void onEmailTap(BuildContext context) {
-    Navigator.of(context).pushNamed(UsernameScreen.routeName);
+    context.push(UsernameScreen.routeName);
+
+    // 두번째
+    // Navigator.of(context).pushNamed(UsernameScreen.routeName);
+
+    //첫번째 navigator
     // Navigator.of(context).push(
     //   PageRouteBuilder(
     //       transitionDuration: Duration(milliseconds: 300),
@@ -36,7 +47,6 @@ class SignUpScreen extends StatelessWidget {
     //           begin: Offset(1, 0),
     //           end: Offset.zero,
     //         ).animate(animation);
-
     //         final opacityAnimation = Tween(
     //           begin: 0.5,
     //           end: 1.0,
@@ -45,7 +55,6 @@ class SignUpScreen extends StatelessWidget {
     //         //   begin: 0.5,
     //         //   end: 1.0,
     //         // ).animate(animation);
-
     //         return SlideTransition(
     //           position: offsetAnimation,
     //           child: FadeTransition(

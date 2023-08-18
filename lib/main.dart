@@ -2,11 +2,8 @@ import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:tiktok_clone/features/authentication/email_screen.dart';
-import 'package:tiktok_clone/features/authentication/login_screen.dart';
-import 'package:tiktok_clone/features/authentication/sign_up_screen.dart';
-import 'package:tiktok_clone/features/authentication/username_screen.dart';
 import 'package:tiktok_clone/generated/l10n.dart';
+import 'package:tiktok_clone/router.dart';
 
 void main() async {
   //
@@ -23,13 +20,13 @@ class TikTikApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     S.load(Locale("en"));
-    return MaterialApp(
+    return MaterialApp.router(
+      routerConfig: router,
       debugShowCheckedModeBanner: false,
       title: "TikTok",
       // themeMode: ThemeMode.system, //시스템에 맞게 다크, 라이트 모드가 결정된다.
       // theme: ThemeData(
       //   useMaterial3: true,
-
       //   // textTheme: TextTheme(
       //   //   headlineLarge: const TextStyle(
       //   //     fontSize: Sizes.size28,
@@ -178,13 +175,6 @@ class TikTikApp extends StatelessWidget {
 // If you do not have a themeMode switch, uncomment this line
 // to let the device system mode control the theme mode:
 // themeMode: ThemeMode.system,
-      // localizationsDelegates: [
-      //   // AppLocali ,
-      //   //default 위젯의 언어는 한국말로 번역된다.
-      //   GlobalMaterialLocalizations.delegate,
-      //   GlobalCupertinoLocalizations.delegate,
-      //   GlobalWidgetsLocalizations.delegate,
-      // ],
 
       // comd shft p => flutter Intl : initialize =>  l10n 폴더에 있는 파일에 번역본을 쓰면 자동으로 생성 된다.
       // flutter Intl : Add locale => ko
@@ -198,13 +188,17 @@ class TikTikApp extends StatelessWidget {
         Locale("en"),
         Locale("ko"),
       ],
-      initialRoute: SignUpScreen.routeName,
-      routes: {
-        SignUpScreen.routeName: (context) => SignUpScreen(),
-        UsernameScreen.routeName: (context) => UsernameScreen(),
-        LoginScreen.routeName: (context) => LoginScreen(),
-        EmailScreen.routeName: (context) => EmailScreen(),
-      },
+      //navigation을 하는 두번째 방식
+      // initialRoute: SignUpScreen.routeName,
+
+      // routes: {
+      //   SignUpScreen.routeName: (context) => SignUpScreen(),
+      //   UsernameScreen.routeName: (context) => UsernameScreen(),
+      //   LoginScreen.routeName: (context) => LoginScreen(),
+      //   EmailScreen.routeName: (context) => EmailScreen(),
+      // },
+
+      //navigation을 하는 첫번째 방식
       // home: const SignUpScreen(),
     );
   }
