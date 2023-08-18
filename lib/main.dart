@@ -2,7 +2,10 @@ import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:tiktok_clone/features/authentication/email_screen.dart';
+import 'package:tiktok_clone/features/authentication/login_screen.dart';
 import 'package:tiktok_clone/features/authentication/sign_up_screen.dart';
+import 'package:tiktok_clone/features/authentication/username_screen.dart';
 import 'package:tiktok_clone/generated/l10n.dart';
 
 void main() async {
@@ -19,7 +22,7 @@ class TikTikApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    S.load(Locale("ko"));
+    S.load(Locale("en"));
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: "TikTok",
@@ -195,16 +198,14 @@ class TikTikApp extends StatelessWidget {
         Locale("en"),
         Locale("ko"),
       ],
-
-      home: const SignUpScreen(),
+      initialRoute: SignUpScreen.routeName,
+      routes: {
+        SignUpScreen.routeName: (context) => SignUpScreen(),
+        UsernameScreen.routeName: (context) => UsernameScreen(),
+        LoginScreen.routeName: (context) => LoginScreen(),
+        EmailScreen.routeName: (context) => EmailScreen(),
+      },
+      // home: const SignUpScreen(),
     );
   }
 }
-// Copyright 2013 The Flutter Authors. All rights reserved.
-// Use of this source code is governed by a BSD-style license that can be
-// found in the LICENSE file.
-
-// ignore_for_file: public_member_api_docs
-
-/// An example of using the plugin, controlling lifecycle and playback of the
-/// video.

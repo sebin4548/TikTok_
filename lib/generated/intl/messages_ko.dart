@@ -29,6 +29,7 @@ class MessageLookup extends MessageLookupByLibrary {
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "description": m0,
         "login": m1,
+        "numHeart": MessageLookupByLibrary.simpleMessage("dddd"),
         "signUpTiktoks": MessageLookupByLibrary.simpleMessage("Tiktoks에 회원가입")
       };
 }

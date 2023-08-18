@@ -79,6 +79,16 @@ class S {
       args: [gender],
     );
   }
+
+  /// `{ddd}`
+  String numHeart(Object ddd) {
+    return Intl.message(
+      '$ddd',
+      name: 'numHeart',
+      desc: 'Anything you want',
+      args: [ddd],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

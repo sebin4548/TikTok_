@@ -26,10 +26,13 @@ class MessageLookup extends MessageLookupByLibrary {
   static String m1(gender) =>
       "Log in ${Intl.gender(gender, female: 'madam', male: 'sir', other: 'human')}.";
 
+  static String m2(ddd) => "${ddd}";
+
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "description": m0,
         "login": m1,
+        "numHeart": m2,
         "signUpTiktoks": MessageLookupByLibrary.simpleMessage("Sign Up Tiktoks")
       };
 }

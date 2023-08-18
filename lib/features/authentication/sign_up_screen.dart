@@ -2,25 +2,59 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tiktok_clone/constants/gaps.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
+import 'package:tiktok_clone/features/authentication/login_screen.dart';
 import 'package:tiktok_clone/features/authentication/username_screen.dart';
 import 'package:tiktok_clone/features/authentication/widgets/auth_button.dart';
-import 'package:tiktok_clone/features/authentication/login_screen.dart';
+import 'package:tiktok_clone/generated/l10n.dart';
 
 import 'package:tiktok_clone/utils.dart';
 
 class SignUpScreen extends StatelessWidget {
+  static String routeName = "/";
   const SignUpScreen({super.key});
 
-  void _onLoginTap(BuildContext context) {
-    Navigator.of(context).push(MaterialPageRoute(
-      builder: (context) => const LoginScreen(),
-    ));
+  void _onLoginTap(BuildContext context) async {
+    // //await를 이용하여 정보를 주고받기
+    // final result = await Navigator.of(context).push(MaterialPageRoute(
+    //   builder: (context) => const LoginScreen(),
+    // ));
+    // print(result);
+    final result = Navigator.of(context).pushNamed(LoginScreen.routeName);
+    print(result);
   }
 
   void onEmailTap(BuildContext context) {
-    Navigator.of(context).push(MaterialPageRoute(
-      builder: (context) => const UsernameScreen(),
-    ));
+    Navigator.of(context).pushNamed(UsernameScreen.routeName);
+    // Navigator.of(context).push(
+    //   PageRouteBuilder(
+    //       transitionDuration: Duration(milliseconds: 300),
+    //       reverseTransitionDuration: Duration(milliseconds: 300),
+    //       pageBuilder: (context, animation, secondaryAnimation) =>
+    //           UsernameScreen(),
+    //       transitionsBuilder: (context, animation, secondaryAnimation, child) {
+    //         final offsetAnimation = Tween(
+    //           begin: Offset(1, 0),
+    //           end: Offset.zero,
+    //         ).animate(animation);
+
+    //         final opacityAnimation = Tween(
+    //           begin: 0.5,
+    //           end: 1.0,
+    //         ).animate(animation);
+    //         // final opacityAnimation = Tween(
+    //         //   begin: 0.5,
+    //         //   end: 1.0,
+    //         // ).animate(animation);
+
+    //         return SlideTransition(
+    //           position: offsetAnimation,
+    //           child: FadeTransition(
+    //             opacity: opacityAnimation,
+    //             child: child,
+    //           ),
+    //         );
+    //       }),
+    // );
   }
 
   @override
@@ -48,8 +82,8 @@ class SignUpScreen extends StatelessWidget {
                   ),
                   Gaps.v20,
                   Text(
-                    "dddddddddsdsdssd",
-                    // S.of(context).description(0),
+                    // "dddddddddsdsdssd",
+                    S.of(context).description(0),
                     // 이렇게 되어 있는 상태에서 Code Action(cmd .) 눌러서 바로 연결되게 하면 됨
                     // S.of(context).signUpSubtitle,
                     style: TextStyle(

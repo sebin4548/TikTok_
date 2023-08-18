@@ -1,6 +1,6 @@
 {
   "signUpTiktoks": "Tiktoks에 회원가입",
   "description": "Cs, make your own  , and more.",
-  "login": "Log in {gender, select, male{sir} female{madam} other{human}}."
+  "login": "Log in {gender, select, male{sir} female{madam} other{human}}.",
 
 }
