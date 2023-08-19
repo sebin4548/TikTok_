@@ -32,10 +32,10 @@ class SignUpScreen extends StatelessWidget {
   void onEmailTap(BuildContext context) {
     // push를 하는 방법에는 여러가지가 있다.
     // context.push(UsernameScreen.routeName);
-    // context.pushNamed("username");
+    context.pushNamed("username");
 
     //just for temp
-    context.go("/users/lynn?show=likes");
+    // context.push("/users/lynn?show=likes");
 
     // 두번째
     // Navigator.of(context).pushNamed(UsernameScreen.routeName);
