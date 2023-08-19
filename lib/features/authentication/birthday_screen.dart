@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:tiktok_clone/constants/gaps.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
-import 'package:tiktok_clone/features/authentication/onboarding/interest_screen.dart';
 import 'package:tiktok_clone/features/authentication/widgets/form_button.dart';
 
 class BirthdayScreen extends StatefulWidget {
@@ -40,11 +40,14 @@ class _BirthdayScreenState extends State<BirthdayScreen> {
     //   builder: (context) =>
     //       const InterestScreen(), //Stateful widget에서는 굳이 context를 쓸 필요가 없다.
     // ));
-    Navigator.of(context).pushAndRemoveUntil(
-        MaterialPageRoute(
-          builder: (context) => const InterestScreen(),
-        ),
-        (route) => false);
+    // Navigator.of(context).pushAndRemoveUntil(
+    //     MaterialPageRoute(
+    //       builder: (context) => const InterestScreen(),
+    //     ),
+    //     (route) => false);
+
+    // Navigator.pushNamedAndRemoveUntil(context, "tutorial", (route) => false);
+    context.pushNamed("tutorial");
   }
 
   void _setTextFieldDate(DateTime date) {

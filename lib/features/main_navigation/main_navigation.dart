@@ -47,9 +47,9 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
           ? Colors.black
           : Colors.white,
       resizeToAvoidBottomInset: false,
-      //       //Globalkey를 넣음으로서 각각의 스크린을 독립적으로
-//       //그러나 화면이 바뀌면 매번 killing됨.
-//       //이거를 바꾸기 위해 모든 화면을 그리긴 하지만 시각적으로 보이지 않게끔 만든다.
+      //Globalkey를 넣음으로서 각각의 스크린을 독립적으로
+      //그러나 화면이 바뀌면 매번 killing됨.
+      //이거를 바꾸기 위해 모든 화면을 그리긴 하지만 시각적으로 보이지 않게끔 만든다.
       body: Stack(
         children: [
           Offstage(
@@ -68,6 +68,7 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
             offstage: _selectedIndex != 4,
             child: const UserProfileScreen(
               username: "준표",
+              tab: "",
             ),
           )
         ],

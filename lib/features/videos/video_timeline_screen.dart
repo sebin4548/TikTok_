@@ -16,13 +16,6 @@ class _VideoTimelineScreenState extends State<VideoTimelineScreen> {
   final PageController _pageController = PageController();
   final bool _isMute = true;
 
-  List<Color> colors = [
-    Colors.blue,
-    Colors.red,
-    Colors.yellow,
-    Colors.teal,
-  ];
-
   void _onPageChanged(int page) {
     _pageController.animateToPage(
       page,
