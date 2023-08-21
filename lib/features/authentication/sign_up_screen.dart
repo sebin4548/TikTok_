@@ -83,7 +83,7 @@ class SignUpScreen extends StatelessWidget {
         print("ssssssss $orientation");
 
         return Scaffold(
-          // backgroundColor: Colors.white,
+          backgroundColor: Colors.white,
           body: SafeArea(
             // SafeArea는 노치 부분 시간부분, 베터리잔량표시로 가려지는 부분이 없도록 만드는 것
             child: Padding(
