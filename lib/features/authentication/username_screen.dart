@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:tiktok_clone/constants/gaps.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
 import 'package:tiktok_clone/features/authentication/email_screen.dart';
@@ -7,8 +6,8 @@ import 'package:tiktok_clone/features/authentication/widgets/form_button.dart';
 import 'package:tiktok_clone/utils.dart';
 
 class UsernameScreen extends StatefulWidget {
-  static String routeURL = "username";
-  static String routeName = "username";
+  // static String routeURL = "username";
+  // static String routeName = "username";
   const UsernameScreen({super.key});
 
   @override
@@ -38,21 +37,21 @@ class _UsernameScreenState extends State<UsernameScreen> {
 
   void _onNextTap() {
     if (_username.isEmpty) return;
-    // Navigator.push(
-    //   context,
-    //   MaterialPageRoute(
-    //     builder: (context) => EmailScreen(
-    //         // username: _username,
-    //         ), //Stateful widget에서는 굳이 context를 쓸 필요가 없다.
-    //   ),
-    // );
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => EmailScreen(
+          username: _username,
+        ), //Stateful widget에서는 굳이 context를 쓸 필요가 없다.
+      ),
+    );
 
     // Navigator.pushNamed(context, EmailScreen.routeName,
     // arguments: EmailScreenArgs(username: _username));
 
     // context.push(EmailScreen.routeName);
-    context.pushNamed(EmailScreen.routeName,
-        extra: EmailScreenArgs(username: _username));
+    // context.pushNamed(EmailScreen.routeName,
+    //     extra: EmailScreenArgs(username: _username));
   }
 
   @override

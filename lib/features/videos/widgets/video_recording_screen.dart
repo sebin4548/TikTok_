@@ -11,6 +11,9 @@ import 'package:tiktok_clone/constants/sizes.dart';
 import 'package:tiktok_clone/features/videos/widgets/video_preview_screen.dart';
 
 class VideoRecordingScreen extends StatefulWidget {
+  static const String routeName = "postVideo";
+  static const String routeURL = "/upload";
+
   const VideoRecordingScreen({super.key});
 
   @override
@@ -63,6 +66,7 @@ class _VideoRecordingScreenState extends State<VideoRecordingScreen>
     //only for ios
     await _cameraController.prepareForVideoRecording();
     _flashMode = _cameraController.value.flashMode;
+    setState(() {});
   }
 
   Future<void> initPermissions() async {
@@ -100,7 +104,7 @@ class _VideoRecordingScreenState extends State<VideoRecordingScreen>
         _hasPermission = true;
       });
     }
-    initPermissions();
+    // initPermissions();
     //유저가 application을 벗어나면 우리가 알 수 있게 하는것
     WidgetsBinding.instance.addObserver(this);
     _progressAnimationController.addListener(() {
@@ -185,7 +189,7 @@ class _VideoRecordingScreenState extends State<VideoRecordingScreen>
 
   // void didChangeAppLifecycleStates() {}
   @override
-  Future<void> didChangeAppLifecycleState(AppLifecycleState state) async {
+  void didChangeAppLifecycleState(AppLifecycleState state) {
     // TODO: implement didChangeAppLifecycleState
     super.didChangeAppLifecycleState(state);
     print(" jjjjjjjjjjjjjjjj \n \n");
@@ -195,8 +199,8 @@ class _VideoRecordingScreenState extends State<VideoRecordingScreen>
     if (state == AppLifecycleState.inactive) {
       _cameraController.dispose();
     } else if (state == AppLifecycleState.resumed) {
-      await initCamera();
-      setState(() {});
+      initCamera();
+      // setState(() {});
     }
   }
 

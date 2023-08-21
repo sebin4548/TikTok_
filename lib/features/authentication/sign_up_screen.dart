@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:tiktok_clone/constants/gaps.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
 import 'package:tiktok_clone/features/authentication/login_screen.dart';
+import 'package:tiktok_clone/features/authentication/username_screen.dart';
 import 'package:tiktok_clone/features/authentication/widgets/auth_button.dart';
 import 'package:tiktok_clone/generated/l10n.dart';
 
@@ -15,7 +16,7 @@ class SignUpScreen extends StatelessWidget {
   const SignUpScreen({super.key});
 
   void _onLoginTap(BuildContext context) async {
-    context.push(LoginScreen.routeName); //stack : 이전 화면 위에 다른 화면을 올린다.
+    context.push(LoginScreen.routeURL); //stack : 이전 화면 위에 다른 화면을 올린다.
     // context.go(LoginScreen.routeName); //go는 다른 화면으로 이동시키며, stack에 관련된 것은 전부 무시
 
     // //await를 이용하여 정보를 주고받기
@@ -32,7 +33,7 @@ class SignUpScreen extends StatelessWidget {
   void onEmailTap(BuildContext context) {
     // push를 하는 방법에는 여러가지가 있다.
     // context.push(UsernameScreen.routeName);
-    context.pushNamed("username");
+    // context.pushNamed("username");
 
     //just for temp
     // context.push("/users/lynn?show=likes");
@@ -41,34 +42,34 @@ class SignUpScreen extends StatelessWidget {
     // Navigator.of(context).pushNamed(UsernameScreen.routeName);
 
     //첫번째 navigator
-    // Navigator.of(context).push(
-    //   PageRouteBuilder(
-    //       transitionDuration: Duration(milliseconds: 300),
-    //       reverseTransitionDuration: Duration(milliseconds: 300),
-    //       pageBuilder: (context, animation, secondaryAnimation) =>
-    //           UsernameScreen(),
-    //       transitionsBuilder: (context, animation, secondaryAnimation, child) {
-    //         final offsetAnimation = Tween(
-    //           begin: Offset(1, 0),
-    //           end: Offset.zero,
-    //         ).animate(animation);
-    //         final opacityAnimation = Tween(
-    //           begin: 0.5,
-    //           end: 1.0,
-    //         ).animate(animation);
-    //         // final opacityAnimation = Tween(
-    //         //   begin: 0.5,
-    //         //   end: 1.0,
-    //         // ).animate(animation);
-    //         return SlideTransition(
-    //           position: offsetAnimation,
-    //           child: FadeTransition(
-    //             opacity: opacityAnimation,
-    //             child: child,
-    //           ),
-    //         );
-    //       }),
-    // );
+    Navigator.of(context).push(
+      PageRouteBuilder(
+          transitionDuration: Duration(milliseconds: 300),
+          reverseTransitionDuration: Duration(milliseconds: 300),
+          pageBuilder: (context, animation, secondaryAnimation) =>
+              UsernameScreen(),
+          transitionsBuilder: (context, animation, secondaryAnimation, child) {
+            final offsetAnimation = Tween(
+              begin: Offset(1, 0),
+              end: Offset.zero,
+            ).animate(animation);
+            final opacityAnimation = Tween(
+              begin: 0.5,
+              end: 1.0,
+            ).animate(animation);
+            // final opacityAnimation = Tween(
+            //   begin: 0.5,
+            //   end: 1.0,
+            // ).animate(animation);
+            return SlideTransition(
+              position: offsetAnimation,
+              child: FadeTransition(
+                opacity: opacityAnimation,
+                child: child,
+              ),
+            );
+          }),
+    );
   }
 
   void megastudy(BuildContext context) {

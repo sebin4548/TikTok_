@@ -51,7 +51,7 @@ class _TutorialScreenState extends State<TutorialScreen> {
     //   // print(route);
     //   return false;
     // });
-    context.go("/mainNavigation");
+    context.go("/home");
     // context.pushNamed("mainNavigation");
     // Navigator.of(context).pushNamed("tutorial");
     // Navigator.of(context).pushNamedAndRemoveUntil("tutorial", (route) => false);
