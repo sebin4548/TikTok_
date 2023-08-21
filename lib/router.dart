@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tiktok_clone/features/authentication/email_screen.dart';
 import 'package:tiktok_clone/features/authentication/onboarding/tutorial_screen.dart';
@@ -49,12 +50,43 @@ final router = GoRouter(
             builder: (context, state) => VideoRecordingScreen(),
           ),
         ]),
-
     GoRoute(
       path: "/VideoRecordingScreen",
       name: "VideoRecordingScreen",
-      builder: (context, state) => VideoRecordingScreen(),
+      pageBuilder: (context, state) {
+        return CustomTransitionPage(
+          child: VideoRecordingScreen(),
+          transitionsBuilder: (context, animation, secondaryAnimation, child) {
+            return FadeTransition(
+              opacity: animation,
+              child: ScaleTransition(
+                scale: animation,
+                child: child,
+              ),
+            );
+          },
+        );
+      },
     ),
+
+    // GoRoute(
+    //   path: "/VideoRecordingScreen",
+    //   name: "VideoRecordingScreen",
+    //   pageBuilder: (context, state) {
+    //     return CustomTransitionPage(
+    //       child: VideoRecordingScreen(),
+    //       transitionsBuilder: (context, animation, secondaryAnimation, child) {
+    //         return FadeTransition(
+    //           opacity: animation,
+    //           child: ScaleTransition(
+    //             scale: animation,
+    //             child: child,
+    //           ),
+    //         );
+    //       },
+    //     );
+    //   },
+    // ),
 
     // GoRoute(
     //   name: "username_screen",
@@ -76,6 +108,7 @@ final router = GoRouter(
     // ),
 
     // GoRoute(
+    //   name: "temp",
     //   path: "/users/:username",
     //   builder: (context, state) {
     //     final username = state.params['username'];
@@ -86,5 +119,12 @@ final router = GoRouter(
     //     );
     //   },
     // ),
+    GoRoute(
+      name: "temp",
+      path: "/users/:username",
+      builder: (context, state) {
+        return MainNavigationScreen();
+      },
+    ),
   ],
 );

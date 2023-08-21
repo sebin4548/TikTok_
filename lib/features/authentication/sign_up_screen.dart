@@ -71,6 +71,11 @@ class SignUpScreen extends StatelessWidget {
     // );
   }
 
+  void megastudy(BuildContext context) {
+    // context.pushNamed("temp");
+    context.push("/users/lynn");
+  }
+
   @override
   Widget build(BuildContext context) {
     return OrientationBuilder(
@@ -129,6 +134,16 @@ class SignUpScreen extends StatelessWidget {
                       onTap: () {},
                       child: AuthButton(
                         text: "Continue with apple",
+                        icon: FaIcon(
+                          FontAwesomeIcons.apple,
+                        ),
+                      ),
+                    ),
+                    Gaps.v16,
+                    GestureDetector(
+                      onTap: () => megastudy(context),
+                      child: AuthButton(
+                        text: "Direct",
                         icon: FaIcon(
                           FontAwesomeIcons.apple,
                         ),
