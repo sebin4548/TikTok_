@@ -104,6 +104,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
+
   @override
   State<SettingsScreen> createState() => _SettingsScreenState();
 }
@@ -112,7 +113,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
   bool _notifications = false;
   void _onNotificationsChanged(bool? newValue) {
     if (newValue == null) return;
-    // VideoPost.isMute;
+    // VideoPost(onVideoFinished: onVideoFinished, index: index);
+
+    print("Drag object");
+
+    // VideoPost.isMute = true;
+
     setState(() {
       _notifications = newValue;
     });

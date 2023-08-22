@@ -12,6 +12,7 @@ void main() async {
       [DeviceOrientation.portraitUp]); //가로 세로 방향 고정하라
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.light);
   runApp(const TikTikApp());
+  // VideoPost.isMuteChange(true);
 }
 
 class TikTikApp extends StatelessWidget {

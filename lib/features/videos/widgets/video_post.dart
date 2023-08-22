@@ -12,12 +12,16 @@ class VideoPost extends StatefulWidget {
   final Function onVideoFinished;
   final int index;
 
+  void HOng() {
+    print("sssss");
+  }
+
   VideoPost({
     super.key,
     required this.onVideoFinished,
     required this.index,
   });
-  bool isMute = true;
+
   @override
   State<VideoPost> createState() => _VideoPostState();
 }
@@ -32,6 +36,9 @@ class _VideoPostState extends State<VideoPost>
   double _volumeListenerValue = 0;
   double _getVolume = 0;
   double _setVolumeValue = 0;
+  bool isMute = true;
+
+  // set isMuteChange(bool mute) => setState(() => isMute = mute);
 
   void _onVideoChange() {
     if (_videoPlayerController.value.isInitialized) {
@@ -68,16 +75,16 @@ class _VideoPostState extends State<VideoPost>
     );
 
     VolumeController().listener((volume) async {
-      print("Drag  444444 $volume    ${widget.isMute}");
+      print("Drag  444444 $volume    $isMute");
       setState(() {
         _volumeListenerValue = volume;
       });
 
-      if (widget.isMute && _videoPlayerController.value.isPlaying) {
+      if (isMute && _videoPlayerController.value.isPlaying) {
         await _videoPlayerController.setVolume(100);
         print("Drag 11111its mute");
         setState(() {
-          widget.isMute = false;
+          isMute = false;
         });
       }
     });
@@ -122,21 +129,21 @@ class _VideoPostState extends State<VideoPost>
 
   void onMute(BuildContext context) async {
     // print("object");
-    // print("$widget.isMute");
-    print("Drag ${widget.isMute}");
-    if (widget.isMute) {
+    // print("$isMute");
+    print("Drag $isMute");
+    if (isMute) {
       await _videoPlayerController.setVolume(100);
       setState(() {
-        widget.isMute = false;
+        isMute = false;
       });
     } else {
       await _videoPlayerController.setVolume(0);
       setState(() {
-        widget.isMute = true;
+        isMute = true;
       });
     }
 
-    print("Drag ${widget.isMute}");
+    print("Drag $isMute");
     // _videoPlayerController.
   }
 
@@ -195,6 +202,17 @@ class _VideoPostState extends State<VideoPost>
                     ),
                   ),
                 ),
+              ),
+            ),
+          ),
+          Positioned(
+            left: 20,
+            top: 40,
+            child: IconButton(
+              onPressed: () {},
+              icon: FaIcon(
+                FontAwesomeIcons.volumeHigh,
+                color: Colors.white,
               ),
             ),
           ),
