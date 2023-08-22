@@ -1,52 +1,13 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 
-class VideoConfigData extends InheritedWidget {
-  final bool autoMute;
-  final void Function() toggleMuted;
-
-  VideoConfigData(
-      {required this.toggleMuted,
-      required this.autoMute,
-      super.key,
-      required super.child});
-
-  static VideoConfigData of(BuildContext context) {
-    return context.dependOnInheritedWidgetOfExactType<VideoConfigData>()!;
-  }
-
-  @override
-  bool updateShouldNotify(covariant InheritedWidget oldWidget) {
-    // TODO: implement updateShouldNotify
-    return true;
+// ChangeNotifier
+//api에서 뭘 많이 받거나 데이터가 많을 때 유용
+class VideoConfig extends ChangeNotifier {
+  bool autoMute = true;
+  void toggleAutoMute() {
+    autoMute = !autoMute;
+    notifyListeners();
   }
 }
 
-class VideoConfig extends StatefulWidget {
-  final Widget child;
-  const VideoConfig({
-    super.key,
-    required this.child,
-  });
-
-  @override
-  State<VideoConfig> createState() => _VideoConfigState();
-}
-
-class _VideoConfigState extends State<VideoConfig> {
-  bool autoMute = false;
-
-  void toggleMuted() {
-    setState(() {
-      autoMute = !autoMute;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return VideoConfigData(
-      toggleMuted: toggleMuted,
-      autoMute: autoMute,
-      child: widget.child,
-    );
-  }
-}
+final videoConfig = VideoConfig();

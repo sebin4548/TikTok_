@@ -38,7 +38,7 @@ class _VideoPostState extends State<VideoPost>
   double _getVolume = 0;
   double _setVolumeValue = 0;
   bool isMute = true;
-
+  bool _autoMute = videoConfig.autoMute;
   // set isMuteChange(bool mute) => setState(() => isMute = mute);
 
   void _onVideoChange() {
@@ -92,6 +92,12 @@ class _VideoPostState extends State<VideoPost>
 
     VolumeController().getVolume().then((volume) => _setVolumeValue = volume);
 
+    videoConfig.addListener(() {
+      setState(() {
+        _autoMute = videoConfig.autoMute;
+      });
+    });
+
     // print(isMute);
   }
 
@@ -115,6 +121,7 @@ class _VideoPostState extends State<VideoPost>
   }
 
   bool _isPaused = false;
+
   void _onTogglePause() {
     if (_videoPlayerController.value.isPlaying) {
       _videoPlayerController.pause();
@@ -164,7 +171,6 @@ class _VideoPostState extends State<VideoPost>
 
   @override
   Widget build(BuildContext context) {
-    VideoConfigData.of(context).autoMute;
     return VisibilityDetector(
       key: Key("${widget.index}"),
       onVisibilityChanged: _onVisibilityChanged,
@@ -211,9 +217,9 @@ class _VideoPostState extends State<VideoPost>
             left: 20,
             top: 40,
             child: IconButton(
-              onPressed: VideoConfigData.of(context).toggleMuted,
+              onPressed: () => videoConfig.toggleAutoMute(),
               icon: FaIcon(
-                VideoConfigData.of(context).autoMute
+                _autoMute
                     ? FontAwesomeIcons.volumeOff
                     : FontAwesomeIcons.volumeHigh,
                 color: Colors.white,
