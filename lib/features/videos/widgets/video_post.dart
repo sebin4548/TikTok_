@@ -38,7 +38,8 @@ class _VideoPostState extends State<VideoPost>
   double _getVolume = 0;
   double _setVolumeValue = 0;
   bool isMute = true;
-  bool _autoMute = videoConfig.autoMute;
+  // bool _autoMute = videoConfig.autoMute;
+  bool _autoMute = videoConfig.value;
   // set isMuteChange(bool mute) => setState(() => isMute = mute);
 
   void _onVideoChange() {
@@ -92,11 +93,11 @@ class _VideoPostState extends State<VideoPost>
 
     VolumeController().getVolume().then((volume) => _setVolumeValue = volume);
 
-    videoConfig.addListener(() {
-      setState(() {
-        _autoMute = videoConfig.autoMute;
-      });
-    });
+    // videoConfig.addListener(() {
+    //   setState(() {
+    //     _autoMute = videoConfig.autoMute;
+    //   });
+    // });
 
     // print(isMute);
   }
@@ -217,9 +218,11 @@ class _VideoPostState extends State<VideoPost>
             left: 20,
             top: 40,
             child: IconButton(
-              onPressed: () => videoConfig.toggleAutoMute(),
+              // onPressed: () => videoConfig.toggleAutoMute(),
+              onPressed: () => {videoConfig.value = !videoConfig.value},
               icon: FaIcon(
-                _autoMute
+                // _autoMute
+                false
                     ? FontAwesomeIcons.volumeOff
                     : FontAwesomeIcons.volumeHigh,
                 color: Colors.white,

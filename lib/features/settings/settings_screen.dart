@@ -34,13 +34,18 @@ class _SettingsScreenState extends State<SettingsScreen> {
       ),
       body: ListView(
         children: [
-          AnimatedBuilder(
+          ValueListenableBuilder(
+            valueListenable: videoConfig,
+            // AnimatedBuilder(
             //animatedbuilder이 딱 필요한 위젯부분만 rebuild
-            animation: videoConfig,
-            builder: (context, child) => SwitchListTile.adaptive(
-              value: videoConfig.autoMute,
+            // animation: videoConfig,
+            // builder: (context, child) => SwitchListTile.adaptive(
+            builder: (context, value, child) => SwitchListTile.adaptive(
+              // value: videoConfig.autoMute, //이렇게만 하면 listen하지 못하기에 animation을 넣는다.
+              value: videoConfig.value,
               onChanged: (value) {
-                videoConfig.toggleAutoMute();
+                videoConfig.value = !videoConfig.value;
+                // videoConfig.toggleAutoMute();
               },
               title: Text("Auto Mute Videos"),
               // title: Text(S.of(context).enableNotifications),
