@@ -171,19 +171,19 @@ class _VideoRecordingScreenState extends State<VideoRecordingScreen>
   }
 
   Future<void> _zoom(DragUpdateDetails details) async {
-    // print("DraggZoom");
+    print("DraggZoom");
 
     print("Drag ${details.localPosition.dy}");
 
-    // _cameraController.setZoomLevel(details.localPosition.dy / (50));
-    _cameraController.setZoomLevel(1);
+    _cameraController.setZoomLevel(details.localPosition.dy / (-50));
+    // _cameraController.setZoomLevel(1);
   }
 
   @override
   void dispose() {
     _progressAnimationController.dispose();
     _buttonAnimationController.dispose();
-    _cameraController.dispose();
+    if (!_noCamera) _cameraController.dispose();
     super.dispose();
   }
 
@@ -192,6 +192,8 @@ class _VideoRecordingScreenState extends State<VideoRecordingScreen>
   void didChangeAppLifecycleState(AppLifecycleState state) {
     // TODO: implement didChangeAppLifecycleState
     super.didChangeAppLifecycleState(state);
+
+    if (_noCamera) return;
     print(" jjjjjjjjjjjjjjjj \n \n");
     print(state);
     if (!_hasPermission) return;
@@ -226,10 +228,17 @@ class _VideoRecordingScreenState extends State<VideoRecordingScreen>
               children: [
                 if (!_noCamera && _cameraController.value.isInitialized)
                   CameraPreview(_cameraController),
+                Positioned(
+                  top: Sizes.size40,
+                  left: Sizes.size20,
+                  child: CloseButton(
+                    color: Colors.white,
+                  ),
+                ),
                 if (!_noCamera)
                   Positioned(
                     top: Sizes.size20,
-                    left: Sizes.size20,
+                    right: Sizes.size20,
                     child: Column(
                       children: [
                         IconButton(

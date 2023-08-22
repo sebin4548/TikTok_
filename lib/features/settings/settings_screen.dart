@@ -112,6 +112,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   bool _notifications = false;
   void _onNotificationsChanged(bool? newValue) {
     if (newValue == null) return;
+    // VideoPost.isMute;
     setState(() {
       _notifications = newValue;
     });

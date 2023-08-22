@@ -3,6 +3,7 @@ import 'package:tiktok_clone/features/videos/widgets/video_post.dart';
 
 class VideoTimelineScreen extends StatefulWidget {
   const VideoTimelineScreen({super.key});
+  final bool _isMute = true;
 
   @override
   State<VideoTimelineScreen> createState() => _VideoTimelineScreenState();
@@ -14,7 +15,6 @@ class _VideoTimelineScreenState extends State<VideoTimelineScreen> {
   final Curve _scrollCurve = Curves.linear;
 
   final PageController _pageController = PageController();
-  final bool _isMute = true;
 
   void _onPageChanged(int page) {
     _pageController.animateToPage(
@@ -27,6 +27,7 @@ class _VideoTimelineScreenState extends State<VideoTimelineScreen> {
 
       setState(() {});
     }
+    print("Drag1111111");
   }
 
   void _onVideoFinished() {
@@ -34,6 +35,7 @@ class _VideoTimelineScreenState extends State<VideoTimelineScreen> {
       duration: _scrollDuration,
       curve: _scrollCurve,
     );
+    print("Drag222222");
   }
 
   @override

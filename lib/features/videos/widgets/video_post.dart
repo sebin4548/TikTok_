@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tiktok_clone/constants/gaps.dart';
@@ -7,17 +6,18 @@ import 'package:tiktok_clone/features/videos/widgets/video_botton.dart';
 import 'package:tiktok_clone/features/videos/widgets/video_comments.dart';
 import 'package:video_player/video_player.dart';
 import 'package:visibility_detector/visibility_detector.dart';
+import 'package:volume_controller/volume_controller.dart';
 
 class VideoPost extends StatefulWidget {
   final Function onVideoFinished;
   final int index;
 
-  const VideoPost({
+  VideoPost({
     super.key,
     required this.onVideoFinished,
     required this.index,
   });
-
+  bool isMute = true;
   @override
   State<VideoPost> createState() => _VideoPostState();
 }
@@ -29,6 +29,9 @@ class _VideoPostState extends State<VideoPost>
   final Duration _animationDuration = const Duration(milliseconds: 200);
 
   late final AnimationController _animationController;
+  double _volumeListenerValue = 0;
+  double _getVolume = 0;
+  double _setVolumeValue = 0;
 
   void _onVideoChange() {
     if (_videoPlayerController.value.isInitialized) {
@@ -43,9 +46,9 @@ class _VideoPostState extends State<VideoPost>
     await _videoPlayerController.initialize();
     // _videoPlayerController.play();
     await _videoPlayerController.setLooping(true);
-    if (kIsWeb) {
-      await _videoPlayerController.setVolume(0);
-    }
+    // if (kIsWeb) {
+    await _videoPlayerController.setVolume(0);
+    // }
     _videoPlayerController.addListener(_onVideoChange);
     setState(() {});
   }
@@ -54,6 +57,7 @@ class _VideoPostState extends State<VideoPost>
   void initState() {
     super.initState();
     _initVideoPlayer();
+    print("Drag333333333333");
 
     _animationController = AnimationController(
       vsync: this,
@@ -62,6 +66,24 @@ class _VideoPostState extends State<VideoPost>
       value: 1.5,
       duration: _animationDuration,
     );
+
+    VolumeController().listener((volume) async {
+      print("Drag  444444 $volume    ${widget.isMute}");
+      setState(() {
+        _volumeListenerValue = volume;
+      });
+
+      if (widget.isMute && _videoPlayerController.value.isPlaying) {
+        await _videoPlayerController.setVolume(100);
+        print("Drag 11111its mute");
+        setState(() {
+          widget.isMute = false;
+        });
+      }
+    });
+
+    VolumeController().getVolume().then((volume) => _setVolumeValue = volume);
+
     // print(isMute);
   }
 
@@ -98,18 +120,23 @@ class _VideoPostState extends State<VideoPost>
     });
   }
 
-  bool isMute = true;
   void onMute(BuildContext context) async {
     // print("object");
-    // print("$isMute");
-    if (isMute) {
-      await _videoPlayerController.setVolume(0);
-    } else {
+    // print("$widget.isMute");
+    print("Drag ${widget.isMute}");
+    if (widget.isMute) {
       await _videoPlayerController.setVolume(100);
+      setState(() {
+        widget.isMute = false;
+      });
+    } else {
+      await _videoPlayerController.setVolume(0);
+      setState(() {
+        widget.isMute = true;
+      });
     }
-    setState(() {
-      isMute = !isMute;
-    });
+
+    print("Drag ${widget.isMute}");
     // _videoPlayerController.
   }
 
