@@ -2,7 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:provider/provider.dart';
 import 'package:tiktok_clone/common/widgets/video_configuration/video_config.dart';
+import 'package:tiktok_clone/features/videos/view_models/playback_config_vm.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
@@ -34,23 +36,45 @@ class _SettingsScreenState extends State<SettingsScreen> {
       ),
       body: ListView(
         children: [
-          ValueListenableBuilder(
-            valueListenable: videoConfig,
-            // AnimatedBuilder(
-            //animatedbuilder이 딱 필요한 위젯부분만 rebuild
-            // animation: videoConfig,
-            // builder: (context, child) => SwitchListTile.adaptive(
-            builder: (context, value, child) => SwitchListTile.adaptive(
-              // value: videoConfig.autoMute, //이렇게만 하면 listen하지 못하기에 animation을 넣는다.
-              value: videoConfig.value,
-              onChanged: (value) {
-                videoConfig.value = !videoConfig.value;
-                // videoConfig.toggleAutoMute();
-              },
-              title: Text("Auto Mute Videos"),
-              // title: Text(S.of(context).enableNotifications),
-              subtitle: const Text("Videos will be muted by default"),
-            ),
+          // ValueListenableBuilder(
+          //   valueListenable: videoConfig,
+          //   // AnimatedBuilder(
+          //   //animatedbuilder이 딱 필요한 위젯부분만 rebuild
+          //   // animation: videoConfig,
+          //   // builder: (context, child) => SwitchListTile.adaptive(
+          //   builder: (context, value, child) => SwitchListTile.adaptive(
+          //     // value: videoConfig.autoMute, //이렇게만 하면 listen하지 못하기에 animation을 넣는다.
+          //     value: videoConfig.value,
+          //     onChanged: (value) {
+          //       videoConfig.value = !videoConfig.value;
+          //       // videoConfig.toggleAutoMute();
+          //     },
+          //     title: Text("Auto Mute Videos"),
+          //     // title: Text(S.of(context).enableNotifications),
+          //     subtitle: const Text("Videos will be muted by default"),
+          //   ),
+          // ),
+          SwitchListTile.adaptive(
+            value: context
+                .watch<PlaybackConfigViewModel>()
+                .muted, //watch는 read랑 다르게 변경사항을 watch한다.
+            onChanged: (value) =>
+                context.read<PlaybackConfigViewModel>().setMuted(value),
+            title: Text("Mute video"),
+            subtitle: Text("Video will be muted by default"),
+          ),
+          SwitchListTile.adaptive(
+            value: context
+                .watch<PlaybackConfigViewModel>()
+                .autoplay, //watch는 read랑 다르게 변경사항을 watch한다.
+            onChanged: (value) =>
+                context.read<PlaybackConfigViewModel>().setAutoplay(value),
+            title: Text("AutoPlay"),
+            subtitle: Text("Video will start playing automatically"),
+          ),
+          SwitchListTile.adaptive(
+            onChanged: (value) => context.read<VideoConfig>().toggleIsMuted(),
+            value: context.watch<VideoConfig>().isMuted,
           ),
           CheckboxListTile(
             activeColor: Colors.black,

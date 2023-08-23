@@ -2,6 +2,10 @@ import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:tiktok_clone/features/videos/repos/playback_config_repo.dart';
+import 'package:tiktok_clone/features/videos/view_models/playback_config_vm.dart';
 import 'package:tiktok_clone/generated/l10n.dart';
 import 'package:tiktok_clone/router.dart';
 
@@ -11,7 +15,21 @@ void main() async {
   await SystemChrome.setPreferredOrientations(
       [DeviceOrientation.portraitUp]); //가로 세로 방향 고정하라
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.light);
-  runApp(const TikTikApp());
+
+  final preferences = await SharedPreferences.getInstance();
+  final repository = PlaybackConfigRepository(preferences);
+
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (context) => PlaybackConfigViewModel(repository),
+        )
+      ],
+      child: TikTikApp(),
+    ),
+  );
+  // runApp(const TikTikApp());
   // VideoPost.isMuteChange(true);
 }
 
@@ -21,6 +39,14 @@ class TikTikApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     S.load(Locale("en"));
+    // return
+    // MultiProvider(
+    //   providers: [
+    //     ChangeNotifierProvider(
+    //       create: (context) => VideoConfig(),
+    //     )
+    //   ],
+    // child:
     return MaterialApp.router(
       routerConfig: router,
       debugShowCheckedModeBanner: false,
@@ -201,6 +227,7 @@ class TikTikApp extends StatelessWidget {
 
       //navigation을 하는 첫번째 방식
       // home: const SignUpScreen(),
+      // ),
     );
   }
 }

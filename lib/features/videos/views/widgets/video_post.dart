@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:provider/provider.dart';
 import 'package:tiktok_clone/common/widgets/video_configuration/video_config.dart';
 import 'package:tiktok_clone/constants/gaps.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
-import 'package:tiktok_clone/features/videos/widgets/video_botton.dart';
-import 'package:tiktok_clone/features/videos/widgets/video_comments.dart';
+import 'package:tiktok_clone/features/videos/views/widgets/video_botton.dart';
+import 'package:tiktok_clone/features/videos/views/widgets/video_comments.dart';
 import 'package:video_player/video_player.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 import 'package:volume_controller/volume_controller.dart';
@@ -12,10 +13,6 @@ import 'package:volume_controller/volume_controller.dart';
 class VideoPost extends StatefulWidget {
   final Function onVideoFinished;
   final int index;
-
-  void HOng() {
-    print("sssss");
-  }
 
   VideoPost({
     super.key,
@@ -39,7 +36,9 @@ class _VideoPostState extends State<VideoPost>
   double _setVolumeValue = 0;
   bool isMute = true;
   // bool _autoMute = videoConfig.autoMute;
-  bool _autoMute = videoConfig.value;
+
+  // bool _autoMute = videoConfig.value;
+
   // set isMuteChange(bool mute) => setState(() => isMute = mute);
 
   void _onVideoChange() {
@@ -218,11 +217,14 @@ class _VideoPostState extends State<VideoPost>
             left: 20,
             top: 40,
             child: IconButton(
-              // onPressed: () => videoConfig.toggleAutoMute(),
-              onPressed: () => {videoConfig.value = !videoConfig.value},
+              onPressed: () {
+                context.read<VideoConfig>().toggleIsMuted();
+                //  videoConfig.toggleAutoMute(),
+                // videoConfig.value = !videoConfig.value
+              },
               icon: FaIcon(
                 // _autoMute
-                false
+                context.watch<VideoConfig>().isMuted
                     ? FontAwesomeIcons.volumeOff
                     : FontAwesomeIcons.volumeHigh,
                 color: Colors.white,
